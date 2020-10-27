@@ -5,7 +5,8 @@ import './GithubCard.css'
 class GithubCard extends React.Component {
     state = {
         username: "",
-        userData: []
+        userData: [],
+        myData: []
     }
     
     fetchUser = (username) => {
@@ -14,6 +15,17 @@ class GithubCard extends React.Component {
                 console.log(res.data)
                 this.setState({
                     userData: res.data
+                })
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
+        axios.get(`https://api.github.com/users/${username}`)
+            .then(res => {
+                console.log(res.data)
+                this.setState({
+                    myData: res.data
                 })
             })
             .catch(err => {
@@ -34,10 +46,14 @@ class GithubCard extends React.Component {
     }
 
 
+
     render(){
         const renderedFollowers = this.state.userData.map(follower => {
             return(
-                <div className="followers-container">
+                <div 
+                    className="followers-container"
+                    key={follower.id}
+                >
                     <p>{follower.login}</p>
                     <img
                     width="200"
@@ -62,6 +78,11 @@ class GithubCard extends React.Component {
                 </form>
                 <div className="followers">
                     {renderedFollowers}
+                </div>
+                <div className="followers">
+                    {this.state.myData.login}
+                    {this.state.myData.bio}
+                    <img src={this.state.myData.avatar_url} />
                 </div>
             </div>
         )
