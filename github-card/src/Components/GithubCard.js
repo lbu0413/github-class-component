@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import './GithubCard.css'
 
 class GithubCard extends React.Component {
     state = {
@@ -36,14 +37,14 @@ class GithubCard extends React.Component {
     render(){
         const renderedFollowers = this.state.userData.map(follower => {
             return(
-                <div>
-                    {follower.login}
+                <div className="followers-container">
+                    <p>{follower.login}</p>
                     <img
                     width="200"
                     height="200" 
                     src={follower.avatar_url} 
                     alt={follower.id}/>
-                    github link : {follower.url}
+                    <p>github link : {follower.url}</p>
                 </div>
             )
         })
@@ -59,7 +60,7 @@ class GithubCard extends React.Component {
                     />
                     <button>Submit</button>
                 </form>
-                <div>
+                <div className="followers">
                     {renderedFollowers}
                 </div>
             </div>

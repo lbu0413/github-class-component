@@ -1,0 +1,16 @@
+.followers{
+    display: flex;
+    border: 1px solid gray;
+    margin-top: 1%;
+    align-items: center;
+}
+
+.followers-container p {
+    text-align: center;
+}
+
+.followers-container img{
+    border-radius: 50%;
+
+
+}
